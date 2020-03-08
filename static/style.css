@@ -8,3 +8,8 @@ h1 {
 body {
     background-image: url("image/back.jpg");
 }
+
+#yohoho {
+    width: 640;
+    height: 480;
+}

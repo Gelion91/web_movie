@@ -14,12 +14,14 @@
         <div style="float: right; width: 100px; height: 100px;">
             <a href="http://youtube.com"><button>registration</button></a></div>
         <div style="float: right; width: 100px; height: 100px;"><button>login</button></div>
-        <div style="float: right; width: 500px; height: 100px;"><form method="post" action='hello'><input type="text" size="40" name="search"><input type="submit" value="Поиск">
+        <div style="float: right; width: 500px; height: 100px;"><form method="post" action='search'><input type="text" size="40" name="search"><input type="submit" value="Поиск">
  </form></div>
     </div>
   </div>
   <div>
       <p align="center"><embed><iframe width="640" height="480" src=https://www.youtube.com/embed/{{ id }} frameborder="0" allowfullscreen></iframe></p>
+      <div id="yohoho" data-kinopoisk={{ kinopoisk_id }}></div>
+      <script src="//yohoho.cc/yo.js"></script>
   </div>
   </body>
 </html>
