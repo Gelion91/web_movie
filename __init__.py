@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from webapp.ya_api import get_response
-from webapp.model import db
+from web_movie.ya_api import get_response
+from web_movie.model import db
 
 
 def create_app():
