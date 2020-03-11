@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
-from web_movie.ya_api import get_response
+from webapp.ya_api import get_response
+from webapp.model import db
 
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_pyfile('settings.py')
+    app.config.from_pyfile('config.py')
+    db.init_app(app)
 
     @app.route('/')
     def index():

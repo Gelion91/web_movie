@@ -132,4 +132,4 @@ parser.py
 proxy.txt
 response.txt
 response.xml
-settings.py
+config.py
