@@ -1,6 +1,17 @@
-from flask import Flask, render_template, request
+from flask import render_template, request
 from web_movie.ya_api import get_response
-from web_movie.model import db
+from web_movie.db import db
+
+
+from flask import Flask
+from flask_login import LoginManager
+
+from web_movie.db import db
+from web_movie.user.models import User
+from web_movie.user.views import blueprint as user_blueprint
+from web_movie.admin.views import blueprint as admin_blueprint
+from web_movie.video.views import blueprint as video_blueprint
+
 
 
 def create_app():
@@ -8,17 +19,17 @@ def create_app():
     app.config.from_pyfile('config.py')
     db.init_app(app)
 
-    @app.route('/')
-    def index():
-        id = app.config['DEFAULT_ID']
-        return render_template('index.html', id=id)
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+    login_manager.login_view = 'user.login'
 
-    @app.route('/search', methods=['POST', 'GET'])
-    def search():
-        if request.method == 'POST':
-            result = request.form['search']
-            result = result.split('=')
-            kinopoisk_id = get_response(result)
-            id = result[-1]
-            return render_template('index.html', id=id, kinopoisk_id=kinopoisk_id)
+    app.register_blueprint(user_blueprint)
+    app.register_blueprint(admin_blueprint)
+    app.register_blueprint(video_blueprint)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(user_id)
+
+
     return app
