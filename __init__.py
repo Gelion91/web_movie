@@ -1,17 +1,11 @@
-from flask import render_template, request
-from web_movie.ya_api import get_response
-from web_movie.db import db
-
-
+from web_movie.parse.ya_api import get_response
+from web_movie.video.db import db
 from flask import Flask
 from flask_login import LoginManager
-
-from web_movie.db import db
 from web_movie.user.models import User
 from web_movie.user.views import blueprint as user_blueprint
 from web_movie.admin.views import blueprint as admin_blueprint
 from web_movie.video.views import blueprint as video_blueprint
-
 
 
 def create_app():
@@ -30,6 +24,5 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(user_id)
-
 
     return app

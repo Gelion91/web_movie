@@ -3,22 +3,44 @@
 
 <div class="row">
     {% if username %}
-    <div class="col-8">
-        <div id="yohoho" data-kinopoisk='{{ kinopoisk_id }}'></div>
-        <p height="680" weight="480"><script src="//yohoho.cc/yo.js"></script></p>
-    </div>
-    <div class="col-4">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="alert alert-warning" role="alert">
-            {% for message in messages %}
-                {{ message }}<br>
-            {% endfor %}
-        </div>
+        {% if film.kino_id %}
+            <div class="col-8">
+                <div id="yohoho" data-kinopoisk='{{ film.kino_id }}'></div>
+                <p height="680" width="480"><script src="//yohoho.cc/yo.js"></script></p>
+                <ul>
+                    <li><p>{{ film.name }}</p></li>
+                    <li><p>год: {{ film.year }}</p></li>
+                    <li><p>Жанр: {{ film.category }}</p></li>
+                    <li><p>Анонс: {{ film.content }}...</p></li>
+                    {% for x in range(6) %}
+                        {% for film in films_list %}
+                            <li><p>{{ film.name }}</p></li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-4">
+                <div>
+                    <img width="270" height="370" src="{{ film.img }}">
+                </div>
+            </div>
+        {% else %}
+            <div class="col-8">
+                <div id="yohoho" data-kinopoisk='{{ film }}'></div>
+                <p height="680" weight="480"><script src="//yohoho.cc/yo.js"></script></p>
+            </div>
         {% endif %}
-    {% endwith %}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-warning" role="alert">
+                    {% for message in messages %}
+                        {{ message }}<br>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
     </div>
-      {% else %}
+    {% else %}
     <div class="col-8">
         <img src="static/image/sad_cat.jpeg" class="img-fluid" alt="Responsive image">
     </div>
@@ -35,5 +57,4 @@
         {% endwith %}
     </div>
     {% endif %}
-</div>
 {% endblock %}

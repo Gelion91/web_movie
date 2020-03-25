@@ -17,4 +17,6 @@ def admin_required(func):
             flash('Эта страница доступна только админам')
             return redirect(url_for('search.index'))
         return func(*args, **kwargs)
+
     return decorated_view
+

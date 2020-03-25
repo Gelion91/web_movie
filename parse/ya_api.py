@@ -4,12 +4,13 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import re
 
 
+
 def get_response(query):
     url = 'https://yandex.com/search/xml'
     parameters = {
         'user': current_app.config['USER'],
         'key': current_app.config['KEY'],
-        'query': query,
+        'query': query + 'кинопоиск',
     }
     session = Session()
     try:
