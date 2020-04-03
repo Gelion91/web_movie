@@ -5,7 +5,7 @@ from web_movie import db
 from web_movie.user.forms import LoginForm, RegForm
 from web_movie.user.models import User
 
-blueprint = Blueprint('user', __name__, url_prefix='/users')
+blueprint = Blueprint('user', __name__)
 
 
 @blueprint.route('/login')

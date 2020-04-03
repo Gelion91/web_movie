@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row" id="front2">
+        {% for film in films_list[:9] %}
+            <div class="film" align="center">
+                <p><a href="{{ url_for('films.show_films', film_id=film.kino_id) }}">{{film.name}}</a></p>
+                <img width="150" height="230" src="{{ film.img }}">
+            </div>
+        {% endfor %}
+</div>
+{% endblock %}

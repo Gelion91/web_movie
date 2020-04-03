@@ -24,3 +24,14 @@ body {
 #bar {
     background-color: yellow;
 }
+
+.film {
+    margin: 20px;
+    width: 300px;
+    height: 30%;
+}
+
+#front2 {
+    background-color: white;
+    height: 120%;
+}
