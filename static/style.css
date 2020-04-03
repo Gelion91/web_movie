@@ -31,7 +31,11 @@ body {
     height: 30%;
 }
 
-#front2 {
+.front2 {
     background-color: white;
     height: 120%;
+
+}
+.brd {
+    border-bottom: 2px solid grey;
 }

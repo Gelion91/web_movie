@@ -1,12 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<div class="row" id="front2">
-        {% for film in films_list[:9] %}
+{% for film in films_list.items %}
+<div class="row brd">
+    <div class="col-6 front2">
             <div class="film" align="center">
                 <p><a href="{{ url_for('films.show_films', film_id=film.kino_id) }}">{{film.name}}</a></p>
                 <img width="150" height="230" src="{{ film.img }}">
             </div>
-        {% endfor %}
+
+    </div>
+    <div class="col-6 front2">
+            <div class="film" align="center">
+                <p>год: {{ film.year }}</p>
+                <p>Жанр: {{ film.category }}</p>
+                <p>Анонс: {{ film.content }}...</p>
+            </div>
+    </div>
 </div>
+{% endfor %}
+<nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if films_list.has_prev %}
+                      <li class="page-item"> <a class="page-link" href="{{ url_for('search.index', page=films_list.prev_num) }}">Previous</a></li>
+                    {% else %}
+                      <li class="page-item"><a class="page-link btn disabled" href="#">Previous</a></li>
+                    {% endif %}
+
+
+                    {% if films_list.has_next %}
+                      <li class="page-item"> <a class="page-link" href="{{ url_for('search.index', page=films_list.next_num) }}">Next</a></li>
+                    {% else %}
+                      <li class="page-item"><a class="page-link btn disabled" href="#">Next</a></li>
+                    {% endif %}
+
+                </ul>
+              </nav>
 {% endblock %}

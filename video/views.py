@@ -2,14 +2,14 @@ from flask import Blueprint, render_template, request, current_app, redirect, ur
 from flask_login import current_user
 from web_movie import get_response, User
 from .models import Film
-from web_movie.parse.kinopoisk import kino_scrap
 blueprint = Blueprint('search', __name__)
 
 
 @blueprint.route('/')
-def index():
+@blueprint.route('/<int:page>', methods=['POST', 'GET'])
+def index(page=1):
     title = 'Добро пожаловать!'
-    films_list = Film.query.all()
+    films_list = Film.query.paginate(page, current_app.config['FILM_PER_PAGE'], False)
     if current_user.is_authenticated:
         username = User.__repr__(current_user)
         return render_template('start.html', page_title=title, username=username, films_list=films_list)

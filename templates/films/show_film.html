@@ -12,11 +12,6 @@
                     <li><p>год: {{ film.year }}</p></li>
                     <li><p>Жанр: {{ film.category }}</p></li>
                     <li><p>Анонс: {{ film.content }}...</p></li>
-                    {% for x in range(6) %}
-                        {% for film in films_list %}
-                            <img src="{{ film.img }}">
-                        {% endfor %}
-                    {% endfor %}
                 </ul>
             </div>
             <div class="col-4">

@@ -6,7 +6,7 @@ from web_movie.video.models import Film
 blueprint = Blueprint('films', __name__, url_prefix='/films')
 
 
-@blueprint.route('/<int:film_id>', methods=['POST', 'GET'])
+@blueprint.route('/<film_id>', methods=['POST', 'GET'])
 def show_films(film_id):
     my_film = Film.query.filter_by(kino_id=film_id).first()
     print(my_film.name)
