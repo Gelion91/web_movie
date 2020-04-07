@@ -17,7 +17,7 @@ body {
 #front {
     margin-top: 100px;
     background-color: white;
-    height: 100vh;
+    height: cover;
     position: relative;
 }
 
@@ -32,7 +32,6 @@ body {
 }
 
 .front2 {
-    background-color: white;
     height: 120%;
 
 }

@@ -8,6 +8,7 @@ from web_movie.admin.views import blueprint as admin_blueprint
 from web_movie.video.views import blueprint as video_blueprint
 from web_movie.films.views import blueprint as films_blueprint
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
