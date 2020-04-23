@@ -49,17 +49,17 @@ def registration():
 @blueprint.route('/process-registration', methods=['POST'])
 def process_registration():
     form = RegForm()
-    if User.query.filter(User.username == form.username.data).count():
-        flash('Пользователь с таким именем уже существует')
+    if form.validate_on_submit():
+        new_user = User(username=form.username.data, role='user')
+        new_user.set_password(form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('Вы успешно зарегистрировались')
+        return redirect(url_for('search.index'))
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash('Ошибка в поле "{}": - {}'.format(getattr(form, field).label.text,
+                                                        error
+                                                        ))
         return redirect(url_for('user.registration'))
-
-    if form.password.data != form.password_reply.data:
-        flash('Пароли не совпадают')
-        return redirect(url_for('user.registration'))
-
-    new_user = User(username=form.username.data, role='user')
-    new_user.set_password(form.password.data)
-    db.session.add(new_user)
-    db.session.commit()
-    flash('Вы успешно зарегистрировались')
-    return redirect(url_for('search.index'))

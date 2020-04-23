@@ -19,6 +19,7 @@ body {
     background-color: white;
     height: cover;
     position: relative;
+    min-height: 120%;
 }
 
 #bar {
@@ -33,6 +34,7 @@ body {
 
 .front2 {
     height: 120%;
+    min-height: 120%;
 
 }
 .brd {

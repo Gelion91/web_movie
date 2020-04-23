@@ -12,4 +12,4 @@ def show_films(film_id):
     print(my_film.name)
     if current_user.is_authenticated:
         username = User.__repr__(current_user)
-        return render_template('films/show_film.html', page_title=my_film.name.capitalize(),username=username, film=my_film)
+        return render_template('films/show_film.html', page_title=my_film.name.capitalize(), username=username, film=my_film)

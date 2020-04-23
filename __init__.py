@@ -1,8 +1,10 @@
-from web_movie.parse.ya_api import get_response
-from web_movie.video.db import db
 from flask import Flask
 from flask_login import LoginManager
+from flask_migrate import Migrate
+
+from web_movie.video.db import db
 from web_movie.user.models import User
+from web_movie.parse.ya_api import get_response
 from web_movie.user.views import blueprint as user_blueprint
 from web_movie.admin.views import blueprint as admin_blueprint
 from web_movie.video.views import blueprint as video_blueprint
@@ -13,7 +15,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
     db.init_app(app)
-
+    migrate = Migrate(app, db)
     login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = 'user.login'

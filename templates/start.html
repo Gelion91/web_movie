@@ -1,24 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
 {% for film in films_list.items %}
-<div class="front">
-    <div class="row brd">
-            <div class="col-6 front2">
-                    <div class="film" align="center">
-                        <p><a href="{{ url_for('films.show_films', film_id=film.kino_id) }}">{{film.name}}</a></p>
-                        <img width="150" height="230" src="{{ film.img }}">
-                    </div>
-            </div>
-            <div class="col-6 front2">
-                    <div class="film" align="center">
-                        <p>год: {{ film.year }}</p>
-                        <p>Жанр: {{ film.category }}</p>
-                        <p>Анонс: {{ film.content }}...</p>
-                    </div>
-            </div>
+    <div class="front">
+        <div class="row brd">
+                <div class="col-6 front2">
+                        <div class="film" align="center">
+                            <p><a href="{{ url_for('films.show_films', film_id=film.kino_id) }}">{{film.name}}</a></p>
+                            <img width="150" height="230" src="{{ film.img }}">
+                        </div>
+                </div>
+                <div class="col-6 front2">
+                        <div class="film" align="center">
+                            <p>год: {{ film.year }}</p>
+                            <p>Жанр: {{ film.category }}</p>
+                            <p>Анонс: {{ film.content }}...</p>
+                        </div>
+                </div>
+        </div>
     </div>
-</div>
 {% endfor %}
+
+{% if not films_list.items %}
+    <span><br>К сожалению по вашему запросу ничего не найдено, измените запрос и попробуйте снова.<br></span>
+{% endif %}
+
 <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     {% if films_list.has_prev %}

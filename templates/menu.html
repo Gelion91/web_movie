@@ -5,11 +5,29 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav">
         <li class="nav-item active">
             <a class="nav-link" href="/">Главная страница </a>
         </li>
     </ul>
+    <div class="dropdown navbar-nav mr-auto">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'боевики') }}">Боевики</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'фaнтастика') }}">Фантастика</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'драмы') }}">Драмы</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'триллеры') }}">Триллеры</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'детективы') }}">Детективы</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'ужасы') }}">Ужасы</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'детские') }}">Детские</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'приключения') }}">Приключения</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'комедии') }}">Комедии</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'документальные') }}">Документальные</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'мелодрамы') }}">Мелодрамы</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'военные') }}">Военные</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'сериалы') }}">Сериалы</a>
+        </div>
+    </div>
      <ul class="navbar-nav">
        <li class="nav-item">
            <a class="nav-link" href="{{ url_for('search.index')}}">{{ username }}</a>
@@ -25,7 +43,7 @@
             {% endif %}
         </li>
      </ul>
-    <form class="form-inline my-2 my-lg-0" action="/video" method="POST">
+    <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
     </form>
