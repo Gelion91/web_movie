@@ -1,7 +1,7 @@
 from flask_login import login_user, logout_user, current_user
 from flask import render_template, flash, redirect, url_for, Blueprint
 
-from web_movie import db
+from db import db
 from web_movie.user.forms import LoginForm, RegForm
 from web_movie.user.models import User
 

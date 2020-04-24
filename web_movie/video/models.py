@@ -1,4 +1,4 @@
-from web_movie.video.db import db
+from db import db
 
 
 class Film(db.Model):

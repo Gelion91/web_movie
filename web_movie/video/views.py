@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, current_app, redirect, url_for
 from flask_login import current_user
-from web_movie import get_response, User
 from .models import Film
+from web_movie.user.models import User
 
 blueprint = Blueprint('search', __name__)
 
@@ -41,4 +41,4 @@ def search(page=1):
             films_list = Film.query.filter(Film.name.like('%{}%'.format(result))).paginate(page, current_app.config['FILM_PER_PAGE'], False)
             print(films_list.items)
             return render_template('start.html', page_title='запрос: ' + title, username=username, films_list=films_list)
-    return redirect(url_for('search.index'))
+    return redirect(url_for('user.login'))

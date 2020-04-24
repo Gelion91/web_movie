@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from web_movie.video.db import db
+from web_movie import db
 
 
 class User(db.Model, UserMixin):

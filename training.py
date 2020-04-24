@@ -1,6 +1,6 @@
 import csv
-
-from web_movie import create_app, get_response
+from web_movie.web_movie import create_app
+from web_movie.web_movie.parse.ya_api import get_response
 
 app = create_app()
 with app.app_context():

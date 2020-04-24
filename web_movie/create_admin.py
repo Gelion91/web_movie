@@ -2,7 +2,7 @@ from getpass import getpass
 import sys
 
 from web_movie import create_app
-from web_movie.video.db import db
+from db import db
 from web_movie.user.models import User
 
 app = create_app()

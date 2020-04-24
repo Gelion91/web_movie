@@ -1,5 +1,6 @@
 import csv
-from web_movie import create_app, db
+from web_movie import create_app
+from db import db
 from web_movie.video.models import Film
 
 x = 0

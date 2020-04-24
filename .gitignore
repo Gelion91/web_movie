@@ -109,7 +109,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+env
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -135,3 +135,5 @@ response.xml
 config.py
 .idea
 data_set.csv
+web_movie.db
+training.py
