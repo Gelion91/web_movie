@@ -7,6 +7,10 @@
             <div class="col-8">
                 <div id="yohoho" data-kinopoisk='{{ film.kino_id }}'></div>
                 <p height="680" width="480"><script src="//yohoho.cc/yo.js"></script></p>
+                <rating>
+                    <kp_rating num_vote="15143">8.017</kp_rating>
+                    <imdb_rating num_vote="255677">8.3</imdb_rating>
+                </rating>
                 <ul>
                     <li><p>{{ film.name }}</p></li>
                     <li><p>год: {{ film.year }}</p></li>
@@ -20,10 +24,7 @@
                 </div>
             </div>
         {% else %}
-            <div class="col-8">
-                <div id="yohoho" data-kinopoisk='{{ film }}'></div>
-                <p height="680" weight="480"><script src="//yohoho.cc/yo.js"></script></p>
-            </div>
+            <p>Oops, видимо фильм пока не добавили.</p>
         {% endif %}
             {% with messages = get_flashed_messages() %}
                 {% if messages %}

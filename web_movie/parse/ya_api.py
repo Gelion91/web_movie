@@ -9,7 +9,7 @@ def get_response(query):
     parameters = {
         'user': current_app.config['USER'],
         'key': current_app.config['KEY'],
-        'query': query + 'кинопоиск',
+        'query': query + ' кинопоиск',
     }
     session = Session()
     try:

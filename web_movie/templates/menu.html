@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: silver;">
+<nav class="navbar navbar-expand-lg p-3 mb-2 bg-dark text-white">
   <a class="navbar-brand" href="#">HighFilm</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,23 +9,28 @@
         <li class="nav-item active">
             <a class="nav-link" href="/">Главная страница </a>
         </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('search.category', name = 'Зарубежный фильм') }}">Зарубежные фильмы</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('search.category', name = 'Русский фильм') }}">Русские фильмы</a>
+        </li>
     </ul>
     <div class="dropdown navbar-nav mr-auto">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории</button>
+        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории</button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'боевики') }}">Боевики</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'фaнтастика') }}">Фантастика</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'драмы') }}">Драмы</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'триллеры') }}">Триллеры</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'детективы') }}">Детективы</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'ужасы') }}">Ужасы</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'детские') }}">Детские</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Боевик') }}">Боевики</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Фантастика') }}">Фантастика</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Драма') }}">Драмы</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Триллер') }}">Триллеры</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Детектив') }}">Детективы</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Ужасы') }}">Ужасы</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Детские') }}">Детские</a>
             <a class="dropdown-item" href="{{ url_for('search.category', name = 'приключения') }}">Приключения</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'комедии') }}">Комедии</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'документальные') }}">Документальные</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'мелодрамы') }}">Мелодрамы</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'военные') }}">Военные</a>
-            <a class="dropdown-item" href="{{ url_for('search.category', name = 'сериалы') }}">Сериалы</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Комедия') }}">Комедии</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Документальный') }}">Документальные</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Мелодрама') }}">Мелодрамы</a>
+            <a class="dropdown-item" href="{{ url_for('search.category', name = 'Военный') }}">Военные</a>
         </div>
     </div>
      <ul class="navbar-nav">

@@ -137,4 +137,4 @@ config.py
 data_set.csv
 *.db
 web_movie.db
-training.py
+web_movie/parse/training.py

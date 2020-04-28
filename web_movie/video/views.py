@@ -9,7 +9,7 @@ blueprint = Blueprint('search', __name__)
 @blueprint.route('/')
 @blueprint.route('/page/<int:page>', methods=['POST', 'GET'])
 def index(page=1):
-    title = 'Добро пожаловать!'
+    title = ''
     films_list = Film.query.paginate(page, current_app.config['FILM_PER_PAGE'], False)
     if current_user.is_authenticated:
         username = User.__repr__(current_user)
@@ -36,7 +36,7 @@ def search(page=1):
         username = User.__repr__(current_user)
         if request.method == 'POST':
             result = request.form['search']
-            result = result.lower().strip()
+            result = result.strip()
             title = result
             films_list = Film.query.filter(Film.name.like('%{}%'.format(result))).paginate(page, current_app.config['FILM_PER_PAGE'], False)
             print(films_list.items)
