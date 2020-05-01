@@ -17,6 +17,7 @@ class Film(db.Model):
     operator = db.Column(db.String(), index=True)
     music_author = db.Column(db.String(), index=True)
     country = db.Column(db.String(), index=True)
+    rating = db.Column(db.String(), index=True)
 
 
     def __repr__(self):

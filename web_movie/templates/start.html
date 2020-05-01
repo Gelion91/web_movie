@@ -20,16 +20,27 @@
     <div class="front">
         <div class="row brd">
                 <div class="col-4 front2">
+                    {% if film.kino_id %}
                         <div class="film" align="center">
-                            <p><a href="{{ url_for('films.show_films', film_id=film.kino_id) }}">{{film.name}}</a></p>
+                            <h5><a href="{{ url_for('films.show_films', film_id=film.kino_id) }}">{{film.name}}</a></h5>
+                            <img width="150" height="230" src="{{ film.img }}"><p></p>
+                            <div style="height:38px;background:url(&quot;https://rating.kinopoisk.ru/{{ film.kino_id}}.gif&quot;) no-repeat 50% 0">&nbsp;</div>
+                        </div>
+                    {% else %}
+                        <div class="film" align="center">
+                            <p><a href="#">{{film.name}}</a></p>
+                            <p>Скоро будет добавлен!</p>
                             <img width="150" height="230" src="{{ film.img }}">
                         </div>
+                    {% endif %}
                 </div>
                 <div class="col-8 front2">
                         <div class="film" align="left">
-                            <p><strong>год:</strong> {{ film.year }}</p>
+                            {% if film.year %}<p><strong>Дата выхода в России:</strong> {{ film.year }}</p>{% endif %}
+                            {% if film.producer %}<p><strong>Режисер: </strong>{{ film.producer }}</p>{% endif %}
+                            {% if film.actors %}<p><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
                             <p><strong>Жанр:</strong> {{ film.category }}</p>
-                            <p><strong>Анонс:</strong> {{ film.content }}</p>
+                            <p style="font-style:oblique"><strong>Описание: </strong>{{ film.content }}</p>
                         </div>
                 </div>
         </div>
