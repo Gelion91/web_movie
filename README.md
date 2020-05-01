@@ -12,9 +12,7 @@ web_movie
 
     pip install -r requirements.txt
 
-Зарегистрируйтесь на 'yandex'_ и получите там данные USER и KEY, это понадобится для получения id фильма с www.kinopoisk.ru
-
-.. _yandex: https://xml.yandex.ru/
+Зарегистрируйтесь на https://xml.yandex.ru и получите там данные USER и KEY, это понадобится для получения id фильма с www.kinopoisk.ru
 
 Создайте в корне проекта файл config.py:
 
