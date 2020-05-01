@@ -10,7 +10,7 @@ web_movie
 
 Создайте виртуальное окружение и активируйте его. Потом установите все необходимые зависимости:
 
-..code-block:: text
+.. code-block:: text
 
     pip install -r requirements.txt
 
@@ -18,7 +18,7 @@ web_movie
 
 Создайте в корне проекта файл config.py:
 
-..code-block:: python
+.. code-block:: python
 
     import os
     from datetime import timedelta
@@ -35,13 +35,13 @@ web_movie
 
 Создайте базу данных:
 
-..code-block:: text
+.. code-block:: text
 
     python3 create_db.py
     
 Создайте пользователя с правами администратора:
 
-..code-block:: text
+.. code-block:: text
 
     python3 create_admin.py
     
@@ -50,13 +50,13 @@ web_movie
 
 Запуск на Unix-подобных операционных системах:
 
-..code-block:: text
+.. code-block:: text
 
     ./run.sh
     
 Или
 
-..code-block:: text
+.. code-block:: text
 
     python3 wsgi.py
 
