@@ -6,6 +6,7 @@ class Film(db.Model):
     year = db.Column(db.String(), index=True)
     img = db.Column(db.String(), index=True, unique=True)
     name = db.Column(db.String(), index=True)
+    name_lower = db.Column(db.String(), index=True)
     category = db.Column(db.String(), index=True)
     tags = db.Column(db.String(), index=True)
     kino_id = db.Column(db.String(), index=True, unique=True)
