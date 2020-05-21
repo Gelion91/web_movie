@@ -8,6 +8,13 @@
           <li class="page-item"><a class="page-link btn disabled" href="#">Previous</a></li>
         {% endif %}
 
+        {% for page in films_list.iter_pages(left_edge = 1, left_current = 1, right_current = 3, right_edge = 1) %}
+            {% if page %}
+                <li class="page-item"><a class="page-link" href="{{url_for('search.index', page=page)}}">{{page}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+            {% endif %}
+        {% endfor %}
 
         {% if films_list.has_next %}
           <li class="page-item"> <a class="page-link" href="{{ url_for('search.index', page=films_list.next_num) }}">Next</a></li>
@@ -17,6 +24,7 @@
     </ul>
 </nav>
 {% for film in films_list.items %}
+    {% if film.content and film.img %}
     <div class="front">
         <div class="row brd">
                 <div class="col-4 front2">
@@ -45,6 +53,7 @@
                 </div>
         </div>
     </div>
+{% endif %}
 {% endfor %}
 
     {% if not films_list.items %}

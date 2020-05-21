@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, current_app, redirect, url_for
+from flask import Blueprint, render_template, request, current_app
 from flask_login import current_user
 from .models import Film
 from web_movie.user.models import User
@@ -26,19 +26,18 @@ def category(name, page=1):
     if current_user.is_authenticated:
         username = User.__repr__(current_user)
         return render_template('films/category.html', page_title=title, username=username, films_list=films_list, name=name)
-    return render_template('start.html', page_title=title, films_list=films_list, name=name)
+    return render_template('films/category.html', page_title=title, films_list=films_list, name=name)
 
 
 @blueprint.route('/search', methods=['POST', 'GET'])
 @blueprint.route('/search/<int:page>', methods=['POST', 'GET'])
 def search(page=1):
-    if current_user.is_authenticated:
-        username = User.__repr__(current_user)
-        if request.method == 'POST':
-            result = request.form['search']
-            result = result.strip()
-            title = result
-            films_list = Film.query.filter(Film.name.like('%{}%'.format(result))).paginate(page, current_app.config['FILM_PER_PAGE'], False)
-            print(films_list.items)
-            return render_template('start.html', page_title='запрос: ' + title, username=username, films_list=films_list)
-    return redirect(url_for('user.login'))
+    if request.method == 'POST':
+        result = request.form['search']
+        result = result.strip().lower()
+        title = result
+        films_list = Film.query.filter(Film.name_lower.like('%{}%'.format(result))).paginate(page, current_app.config['FILM_PER_PAGE'], False)
+        print(films_list.items)
+        if current_user.is_authenticated:
+            return render_template('start.html', page_title='запрос: ' + title, username=current_user, films_list=films_list)
+        return render_template('start.html', page_title='запрос: ' + title, films_list=films_list)

@@ -20,6 +20,5 @@ class Film(db.Model):
     country = db.Column(db.String(), index=True)
     rating = db.Column(db.String(), index=True)
 
-
     def __repr__(self):
         return f'фильм {"name"}, id: {"id"}'

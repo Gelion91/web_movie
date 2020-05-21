@@ -9,13 +9,14 @@ with app.app_context():
     def get_film_id():
         film_without_id = Film.query.filter(Film.kino_id.is_(None))
         for film in film_without_id:
-            print(film.year.split('.')[-1], film.name)
-            result = get_response(film.name, film.year.split('.')[-1])
-            if result:
-                if not Film.query.filter(Film.kino_id == result).first():
-                    film.kino_id = result
-                    db.session.add(film)
-                    db.session.commit()
+            print(film.year.split('.')[-1], film.name, film.producer)
+            if film.producer:
+                result = get_response(film.name, producer=film.producer)
+                if result:
+                    if not Film.query.filter(Film.kino_id == result).first():
+                        film.kino_id = result
+                        db.session.add(film)
+                        db.session.commit()
 
 
     get_film_id()

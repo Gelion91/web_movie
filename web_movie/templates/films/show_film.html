@@ -2,7 +2,6 @@
 {% block content %}
 
 <div class="row">
-    {% if username %}
         {% if film.kino_id %}
             <div class="col-8 pdcls">
                 <div id="yohoho" data-kinopoisk='{{ film.kino_id }}' align="right"></div>
@@ -35,5 +34,4 @@
             {% endwith %}
         </div>
     </div>
-    {% endif %}
 {% endblock %}

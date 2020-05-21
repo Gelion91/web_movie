@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template
 from flask_login import current_user
-from werkzeug.utils import redirect
 from web_movie.user.models import User
 from web_movie.video.models import Film
 
@@ -14,4 +13,4 @@ def show_films(film_id):
     if current_user.is_authenticated:
         username = User.__repr__(current_user)
         return render_template('films/show_film.html', page_title=my_film.name, username=username, film=my_film)
-    return redirect(url_for('user.login'))
+    return render_template('films/show_film.html', page_title=my_film.name, film=my_film)
