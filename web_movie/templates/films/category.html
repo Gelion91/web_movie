@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-8 front2">
                     <div class="film" align="left">
-                        {% if film.year %}<p><strong>Дата выхода:</strong> {{ film.year }}</p>{% endif %}
+                        {% if film.year %}<p><strong>Дата выхода в России:</strong> {{ film.published.strftime('%d.%m.%Y') }}</p>{% endif %}
                         <p><strong>Жанр:</strong> {{ film.category }}</p>
                         <p><strong>Описание:</strong> {{ film.content }}</p>
                     </div>

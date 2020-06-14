@@ -9,7 +9,7 @@
                 <p height="680" width="480"><script src="//yohoho.cc/yo.js"></script></p>
                 <ul>
                     <li><p>{{ film.name }}</p></li>
-                    <li><p>год: {{ film.year }}</p></li>
+                    <li><p>год: {{ film.published.strftime('%d.%m.%Y') }}</p></li>
                     <li><p>Жанр: {{ film.category }}</p></li>
                     <li><p>Анонс: {{ film.content }}...</p></li>
                     {% for x in range(6) %}

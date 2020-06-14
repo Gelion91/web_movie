@@ -1,6 +1,7 @@
 import csv
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 from web_movie import db, create_app
 from web_movie.video.models import Film
@@ -33,6 +34,7 @@ def scrap_filmlist(page):
                 name = film.find('div', class_='film-image')['alt']
                 url = film.find('div', class_='film-image').find('a')['href']
                 year = film.find('div', class_='film-foot').find('em').text
+                year = year.split(' ')[-1]
             except AttributeError:
                 print("C этим фильмом проблема!", name)
             genre = []
@@ -46,7 +48,8 @@ def scrap_filmlist(page):
                     name=name,
                     name_lower=name.lower(),
                     category=category,
-                    year=year.split(' ')[-1],
+                    year=year,
+                    published=datetime.strptime(year, '%d.%m.%Y'),
                     film_page=url)
                 db.session.add(new_video)
                 db.session.commit()

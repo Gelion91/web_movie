@@ -3,6 +3,7 @@ from db import db
 
 class Film(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    published = db.Column(db.DateTime)
     year = db.Column(db.String(), index=True)
     img = db.Column(db.String(), index=True, unique=True)
     name = db.Column(db.String(), index=True)

@@ -10,7 +10,7 @@ blueprint = Blueprint('search', __name__)
 @blueprint.route('/page/<int:page>', methods=['POST', 'GET'])
 def index(page=1):
     title = ''
-    films_list = Film.query.paginate(page, current_app.config['FILM_PER_PAGE'], False)
+    films_list = Film.query.order_by(Film.published.desc()).paginate(page, current_app.config['FILM_PER_PAGE'], False)
     if current_user.is_authenticated:
         username = User.__repr__(current_user)
         return render_template('start.html', page_title=title, username=username, films_list=films_list)
@@ -21,8 +21,7 @@ def index(page=1):
 @blueprint.route('/category/<name>/<int:page>')
 def category(name, page=1):
     title = name
-    films_list = Film.query.filter(Film.category.like('%{}%'.format(name))).paginate(page, current_app.config['FILM_PER_PAGE'], False)
-    print(films_list.items)
+    films_list = Film.query.filter(Film.category.like('%{}%'.format(name))).order_by(Film.published.desc()).paginate(page, current_app.config['FILM_PER_PAGE'], False)
     if current_user.is_authenticated:
         username = User.__repr__(current_user)
         return render_template('films/category.html', page_title=title, username=username, films_list=films_list, name=name)
@@ -36,8 +35,7 @@ def search(page=1):
         result = request.form['search']
         result = result.strip().lower()
         title = result
-        films_list = Film.query.filter(Film.name_lower.like('%{}%'.format(result))).paginate(page, current_app.config['FILM_PER_PAGE'], False)
-        print(films_list.items)
+        films_list = Film.query.filter(Film.name_lower.like('%{}%'.format(result))).order_by(Film.published.desc()).paginate(page, current_app.config['FILM_PER_PAGE'], False)
         if current_user.is_authenticated:
             return render_template('start.html', page_title='запрос: ' + title, username=current_user, films_list=films_list)
         return render_template('start.html', page_title='запрос: ' + title, films_list=films_list)

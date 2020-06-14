@@ -7,7 +7,7 @@
                 <div id="yohoho" data-kinopoisk='{{ film.kino_id }}' align="right"></div>
                 <p><script src="//yohoho.cc/yo.js"></script></p>
                     <h4>{{ film.name }}</h4>
-                    {% if film.year %}<p><strong>Дата выхода: </strong> {{ film.year }}</p>{% endif %}
+                    {% if film.year %}<p><strong>Дата выхода в России: </strong> {{ film.published.strftime('%d.%m.%Y') }}</p>{% endif %}
                     {% if film.producer %}<p><strong>Режисер: </strong>{{ film.producer }}</p>{% endif %}
                     {% if film.actors %}<p><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
                     <p><strong>Жанр:</strong> {{ film.category }}</p>
