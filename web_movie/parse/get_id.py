@@ -9,8 +9,8 @@ with app.app_context():
     def get_film_id():
         film_without_id = Film.query.filter(Film.kino_id.is_(None))
         for film in film_without_id:
-            print(film.year.split('.')[-1], film.name, film.producer)
             if film.producer:
+                print(film.year.split('.')[-1], film.name, film.producer)
                 result = get_response(film.name, producer=film.producer)
                 if result:
                     if not Film.query.filter(Film.kino_id == result).first():

@@ -50,7 +50,7 @@ def registration():
 def process_registration():
     form = RegForm()
     if form.validate_on_submit():
-        new_user = User(username=form.username.data, role='user')
+        new_user = User(username=form.username.data, email=form.email.data, role='user')
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
