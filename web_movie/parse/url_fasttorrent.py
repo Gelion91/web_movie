@@ -3,6 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from web_movie import db, create_app
+from web_movie.parse.content_fasttorrent import *
+from web_movie.parse.get_id import get_film_id
 from web_movie.video.models import Film
 from fake_useragent import UserAgent
 
@@ -63,6 +65,8 @@ def save_video(img, name, category, kino_id):
 if __name__ == "__main__":
     app = create_app()
     with app.app_context():
-        for x in range(1, 3016):
+        for x in range(1, 10):
             scrap_filmlist(x)
+        kino_scrap()
+        get_film_id()
 
