@@ -17,6 +17,3 @@ with app.app_context():
                         film.kino_id = result
                         db.session.add(film)
                         db.session.commit()
-
-
-    get_film_id()
