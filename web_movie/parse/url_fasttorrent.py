@@ -29,7 +29,6 @@ def scrap_filmlist(page):
     if html:
         soup = BeautifulSoup(html, 'html.parser')
         all_films = soup.find('div', class_="film-list").findAll('div', itemtype='https://schema.org/Movie')
-        print(x)
         for film in all_films:
             try:
                 name = film.find('div', class_='film-image')['alt']
