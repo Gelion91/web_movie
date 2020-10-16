@@ -14,6 +14,9 @@ with app.app_context():
                 result = get_response(film.name, producer=film.producer)
                 if result:
                     if not Film.query.filter(Film.kino_id == result).first():
-                        film.kino_id = result
-                        db.session.add(film)
-                        db.session.commit()
+                        try:
+                            film.kino_id = result
+                            db.session.add(film)
+                            db.session.commit()
+                        except:
+                            print("Обнаружено совпадение " + film.name)
