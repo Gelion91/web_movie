@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="row">
+<div class="grid">
         {% if film.kino_id %}
-            <div class="col-8 pdcls">
+            <div>
                 <div id="yohoho" data-kinopoisk='{{ film.kino_id }}' align="right"></div>
                 <p><script src="//yohoho.cc/yo.js"></script></p>
-                    <h4>{{ film.name }}</h4>
-                    {% if film.year %}<p><strong>Дата выхода в России: </strong> {{ film.published.strftime('%d.%m.%Y') }}</p>{% endif %}
-                    {% if film.producer %}<p><strong>Режисер: </strong>{{ film.producer }}</p>{% endif %}
-                    {% if film.actors %}<p><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
-                    <p><strong>Жанр:</strong> {{ film.category }}</p>
-                    <p><strong>Описание:</strong> {{ film.content }}</p>
-                </ul>
             </div>
-            <div class="col-4">
+            <div>
                 <div align="center">
-                    <img width="260" height="370" src="{{ film.img }}">
+                    <img width="260px" height="370px" src="{{ film.img }}">
                     <p></p>
                     <div style="height:38px;background:url(&quot;https://rating.kinopoisk.ru/{{ film.kino_id}}.gif&quot;) no-repeat 50% 0">&nbsp;</div>
                 </div>
+            </div>
+            <div>
+                {% if film.year %}<p><strong>Год выхода в России:</strong> {{ film.published.strftime('%Y') }}</p>{% endif %}
+                {% if film.producer %}<p><strong>Режисер: </strong>{{ film.producer }}</p>{% endif %}
+                {% if film.actors %}<p><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
+                <p><strong>Жанр:</strong> {{ film.category }}</p>
+                <p><strong>Описание:</strong> {{ film.content }}</p>
             </div>
         {% else %}
             <p>Oops, видимо фильм пока не добавили.</p>

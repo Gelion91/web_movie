@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, current_app
 from flask_login import current_user
 from .models import Film
 from web_movie.user.models import User
+import datetime
 
 blueprint = Blueprint('search', __name__)
 
