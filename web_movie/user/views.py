@@ -5,13 +5,13 @@ from db import db
 from web_movie.user.forms import LoginForm, RegForm
 from web_movie.user.models import User
 
-blueprint = Blueprint('user', __name__)
+blueprint = Blueprint('users', __name__)
 
 
 @blueprint.route('/login')
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('user.logout'))
+        return redirect(url_for('users.logout'))
     title = 'Авторизация'
     login_form = LoginForm()
     return render_template('user/login.html', page_title=title, form=login_form)
@@ -27,7 +27,7 @@ def process_login():
             flash('Вы успешно авторизованы')
             return redirect(url_for('search.index'))
     flash('Неправильное имя или пароль')
-    return redirect(url_for('user.login'))
+    return redirect(url_for('users.login'))
 
 
 @blueprint.route('/logout')
@@ -62,4 +62,4 @@ def process_registration():
                 flash('Ошибка в поле "{}": - {}'.format(getattr(form, field).label.text,
                                                         error
                                                         ))
-        return redirect(url_for('user.registration'))
+        return redirect(url_for('users.registration'))
