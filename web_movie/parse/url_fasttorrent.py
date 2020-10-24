@@ -58,7 +58,7 @@ def scrap_filmlist(page):
 def kino_scrap():
     """Парсинг данных со страницы фильма и сохранение в базу данных"""
     x = 0
-    film_without_content = Film.query.filter(Film.img.is_(None))
+    film_without_content = Film.query.filter(Film.producer.is_(None))
     for film in film_without_content:
         country, producer, actors, operator, music_author, content, img = '', '', '', '', '', '', ''
         html = get_html(f'http://fast-torrent.ru{film.film_page}')
@@ -74,8 +74,9 @@ def kino_scrap():
                     country_formated = ', '.join(country)
 
                 for prod in content_films('p', align='left'):
-                    if "Режиссер" in prod.find('strong'):
+                    if "Режиссер" or 'Режиссеры' in prod.find('strong'):
                         producer = prod.find('a').text
+                        print(producer)
                     elif "В ролях" in prod.find('strong'):
                         actors = []
                         for i in prod.find_all('a'):
