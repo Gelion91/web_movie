@@ -1,62 +1,96 @@
 {% extends 'base.html' %}
 {% block content %}
-<nav class="film" aria-label="Page navigation example">
-    <ul class="pagination">
+<div class="center">
+    <div class="grid_start film pagination">
         {% if films_list.has_prev %}
-          <li class="page-item"> <a class="page-link" href="{{ url_for('search.index', page=films_list.prev_num) }}">Previous</a></li>
+          <a href="{{ url_for('search.index', page=films_list.prev_num) }}" tabindex="-1"><<</a>
         {% else %}
-          <li class="page-item"><a class="page-link btn disabled" href="#">Previous</a></li>
+          <a href="#">Previous</a>
         {% endif %}
 
-        {% for page in films_list.iter_pages(left_edge = 1, left_current = 1, right_current = 3, right_edge = 1) %}
+        {% for page in films_list.iter_pages(left_edge = 0, left_current = 1, right_current = 3, right_edge = 0) %}
             {% if page %}
-                <li class="page-item"><a class="page-link" href="{{url_for('search.index', page=page)}}">{{page}}</a></li>
-            {% else %}
-                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                {% if page == films_list.page %}
+                    <a class="active" href="{{url_for('search.index', page=page)}}">{{page}}<span class="sr-only">(current)</span></a>
+                {% else %}
+                    <a class="deactive" href="{{url_for('search.index', page=page)}}">{{page}}</a>
+                {% endif %}
             {% endif %}
         {% endfor %}
 
         {% if films_list.has_next %}
-          <li class="page-item"> <a class="page-link" href="{{ url_for('search.index', page=films_list.next_num) }}">Next</a></li>
+            <a href="{{ url_for('search.index', page=films_list.next_num) }}">>></a>
         {% else %}
-          <li class="page-item"><a class="page-link btn disabled" href="#">Next</a></li>
+            <a  href="#">Next</a>
         {% endif %}
-    </ul>
-</nav>
+    </div>
+</div>
+<p></p>
+<div class="grid_start">
 {% for film in films_list.items %}
     {% if film.content and film.img %}
-    <div class="front">
-        <div class="row brd">
-                <div class="col-4 front2">
-                    {% if film.kino_id %}
-                        <div class="film" align="center">
-                            <h5><a href="{{ url_for('films.show_films', film_id=film.kino_id) }}">{{film.name}}</a></h5>
-                            <img width="150" height="230" src="{{ film.img }}"><p></p>
-                            <div style="height:38px;background:url(&quot;https://rating.kinopoisk.ru/{{ film.kino_id}}.gif&quot;) no-repeat 50% 0">&nbsp;</div>
-                        </div>
-                    {% else %}
-                        <div class="film" align="center">
-                            <p><a href="#">{{film.name}}</a></p>
-                            <p>Скоро будет добавлен!</p>
-                            <img width="150" height="230" src="{{ film.img }}">
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="col-8 front2">
-                        <div class="film" align="left">
-                            {% if film.year %}<p><strong>Дата выхода в России:</strong> {{ film.published.strftime('%d.%m.%Y') }}</p>{% endif %}
+                {% if film.kino_id %}
+                    <div class="film poster" align="center">
+                        <p class="size_name">{{film.name}}</p>
+                        <a href="{{ url_for('films.show_films', film_id=film.kino_id) }}"><img width="150" height="230" src="{{ film.img }}"></a>
+                        <div class="descr transition">
+                            <p><strong>{{film.name}}</strong></p>
+                            {% if film.year %}<p><strong>Год выхода в России:</strong> {{ film.published.strftime('%Y') }}</p>{% endif %}
                             {% if film.producer %}<p><strong>Режисер: </strong>{{ film.producer }}</p>{% endif %}
                             {% if film.actors %}<p><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
                             <p><strong>Жанр:</strong> {{ film.category }}</p>
                             <p class="size" style="font-style:oblique"><strong>Описание: </strong>{{ film.content }}</p>
+                            <div style="height:38px;background:url(&quot;https://rating.kinopoisk.ru/{{ film.kino_id}}.gif&quot;) no-repeat 50% 0">&nbsp;</div>
                         </div>
-                </div>
-        </div>
-    </div>
+                    </div>
+                {% else %}
+                    <div class="film poster" align="center">
+                        <p class="size_name">{{film.name}}</p>
+                        <a href="#"><img style="opacity:0.2;" width="150" height="230" src="{{ film.img }}"></a>
+                        <div class="descr transition">
+                            <p><strong>{{film.name}}</strong></p>
+                            <p>Скоро будет добавлен!</p>
+                            {% if film.year %}<p><strong>Год выхода в России:</strong> {{ film.published.strftime('%Y') }}</p>{% endif %}
+                            {% if film.producer %}<p><strong>Режисер: </strong>{{ film.producer }}</p>{% endif %}
+                            {% if film.actors %}<p><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
+                            <p><strong>Жанр:</strong> {{ film.category }}</p>
+                            <p class="size" style="font-style:oblique"><strong>Описание: </strong>{{ film.content }}</p>
+                            <div style="height:38px;background:url(&quot;https://rating.kinopoisk.ru/{{ film.kino_id}}.gif&quot;) no-repeat 50% 0">&nbsp;</div>
+                        </div>
+                    </div>
+                {% endif %}
 {% endif %}
 {% endfor %}
-
+</div>
     {% if not films_list.items %}
-        <span><br>К сожалению по вашему запросу ничего не найдено, измените запрос и попробуйте снова.<br></span>
+        <p><br>К сожалению по вашему запросу ничего не найдено, измените запрос и попробуйте снова.<br></p>
+    <div class="sol"></div>
     {% endif %}
+<p></p>
+<div class="center">
+    <div class="grid_start film pagination">
+        {% if films_list.has_prev %}
+          <a href="{{ url_for('search.index', page=films_list.prev_num) }}" tabindex="-1"><<</a>
+        {% else %}
+          <a href="#">Previous</a>
+        {% endif %}
+
+        {% for page in films_list.iter_pages(left_edge = 0, left_current = 1, right_current = 3, right_edge = 0) %}
+            {% if page %}
+                {% if page == films_list.page %}
+                    <a class="active" href="{{url_for('search.index', page=page)}}">{{page}}<span class="sr-only">(current)</span></a>
+                {% else %}
+                    <a class="deactive" href="{{url_for('search.index', page=page)}}">{{page}}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if films_list.has_next %}
+            <a href="{{ url_for('search.index', page=films_list.next_num) }}">>></a>
+        {% else %}
+            <a  href="#">Next</a>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
+

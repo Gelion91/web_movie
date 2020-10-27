@@ -7,6 +7,7 @@ h1 {
 }
 body {
     background-image: url("image/backblue.jpg");
+    background-attachment: fixed;
     width: 100%;
     height: 100%;
 }
@@ -18,7 +19,7 @@ body {
 
 #front {
     margin-top: 100px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgb(20, 21, 36);
     height: cover;
     position: relative;
     min-height: 120%;
@@ -30,8 +31,9 @@ body {
 }
 
 .film {
-    margin: 20px;
-    height: 30%;
+    margin-bottom: 0px;
+    height: 105%;
+
 }
 
 .front2 {
@@ -81,8 +83,96 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.size_name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .grid_start {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-row-gap: 40px;
+    grid-column-gap: 10px;
+}
+#hat {
+    height: 100%;
+    padding: 0 px;
+    margin: 0 px;
+    overflow: hidden;
+}
+
+.poster{
+    position:relative;
+}
+.descr{
+    display:none;
+    margin-left:-350px;
+    padding:10px;
+    margin-top:17px;
+    background: rgb(34, 38, 56);
+    -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+    -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+    box-shadow:0 5px 5px rgba(0,0,0,0.3);
+}
+.poster:hover .descr{
+    transition: .55s;
+    display:block;
+    position:absolute;
+    top:120px;
+    z-index:9999;
+    width:400px;
+}
+p {
+    color: rgb(165, 168, 199);
+}
+
+h4 {
+    color: rgb(165, 168, 199);
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid rgb(165, 168, 199);
+}
+
+.pagination a.active {
+    background-color: #374382;
+    color: white;
+    border: 1px solid rgb(165, 168, 199);
+}
+
+.pagination a.deactive {
+    background-color: #222638;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #222638;
+    color: white;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #222638;
+    color: white;
+}
+.center {
+    text-align: center;
+}
+
+.sol {
+height:400px;
 }
