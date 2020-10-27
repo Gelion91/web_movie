@@ -37,8 +37,8 @@
                             <p><strong>{{film.name}}</strong></p>
                             {% if film.year %}<p><strong>Год выхода в России:</strong> {{ film.published.strftime('%Y') }}</p>{% endif %}
                             {% if film.producer %}<p><strong>Режисер: </strong>{{ film.producer }}</p>{% endif %}
-                            {% if film.actors %}<p><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
-                            <p><strong>Жанр:</strong> {{ film.category }}</p>
+                            {% if film.actors %}<p class="size"><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
+                            <p class="size"><strong>Жанр:</strong> {{ film.category }}</p>
                             <p class="size" style="font-style:oblique"><strong>Описание: </strong>{{ film.content }}</p>
                             <div style="height:38px;background:url(&quot;https://rating.kinopoisk.ru/{{ film.kino_id}}.gif&quot;) no-repeat 50% 0">&nbsp;</div>
                         </div>
@@ -52,8 +52,8 @@
                             <p>Скоро будет добавлен!</p>
                             {% if film.year %}<p><strong>Год выхода в России:</strong> {{ film.published.strftime('%Y') }}</p>{% endif %}
                             {% if film.producer %}<p><strong>Режисер: </strong>{{ film.producer }}</p>{% endif %}
-                            {% if film.actors %}<p><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
-                            <p><strong>Жанр:</strong> {{ film.category }}</p>
+                            {% if film.actors %}<p class="size"><strong>В ролях: </strong>{{ film.actors }}</p>{% endif %}
+                            <p class="size"><strong>Жанр:</strong> {{ film.category }}</p>
                             <p class="size" style="font-style:oblique"><strong>Описание: </strong>{{ film.content }}</p>
                             <div style="height:38px;background:url(&quot;https://rating.kinopoisk.ru/{{ film.kino_id}}.gif&quot;) no-repeat 50% 0">&nbsp;</div>
                         </div>
