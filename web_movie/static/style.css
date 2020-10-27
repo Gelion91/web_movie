@@ -95,70 +95,40 @@ body {
     grid-row-gap: 40px;
     grid-column-gap: 10px;
 }
-@media screen and (min-device-width: 1200px){
-    #hat {
-        height: 30%;
-        width: 30%;
-        padding: 0 px;
-        margin: 0 px;
-        overflow: hidden;
-    }
-}
-@media screen and (max-device-width: 1200px){
-    #hat {
-        height: 100%;
-        width: 100%;
-        padding: 0 px;
-        margin: 0 px;
 
-    }
+#hat {
+    height: 30%;
+    width: 30%;
+    padding: 0 px;
+    margin: 0 px;
+    overflow: hidden;
 }
+
 
 .poster{
     position:relative;
 }
-@media screen and (min-device-width: 1200px){
-    .descr{
-        display:none;
-        margin-left: -50%;
-        padding:10px;
-        margin-top:17px;
-        background: rgb(34, 38, 56);
-        -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
-        -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
-        box-shadow:0 5px 5px rgba(0,0,0,0.3);
-    }
 
-    .poster:hover .descr{
-        transition: .55s;
-        display:block;
-        position:absolute;
-        top:120px;
-        z-index:9999;
-        width:200%;
-    }
+.descr{
+    display:none;
+    margin-left: -50%;
+    padding:10px;
+    margin-top:17px;
+    background: rgb(34, 38, 56);
+    -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+    -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+    box-shadow:0 5px 5px rgba(0,0,0,0.3);
 }
-@media screen and (max-device-width: 1200px){
-    .descr{
-        display:none;
-        margin-left: 0%;
-        padding:10px;
-        margin-top:17px;
-        background: rgb(34, 38, 56);
-        -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
-        -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
-        box-shadow:0 5px 5px rgba(0,0,0,0.3);
-    }
 
-    .poster:hover .descr{
-        transition: .55s;
-        display:block;
-        position:absolute;
-        top:120px;
-        z-index:9999;
-        width:100%;
-    }
+.poster:hover .descr{
+    transition: .55s;
+    display:block;
+    position:absolute;
+    top:120px;
+    z-index:9999;
+    width:200%;
 }
+
 p {
     color: rgb(165, 168, 199);
 }
