@@ -33,7 +33,7 @@
                     <div class="film poster" align="center">
                         <p class="size_name">{{film.name}}</p>
                         <a href="{{ url_for('films.show_films', film_id=film.kino_id) }}"><img width="150" height="230" src="{{ film.img }}"></a>
-                        <div class="descr transition">
+                        <div class="descr transition" placement="auto">
                             <p><strong>{{film.name}}</strong></p>
                             {% if film.year %}<p><strong>Год выхода в России:</strong> {{ film.published.strftime('%Y') }}</p>{% endif %}
                             {% if film.producer %}<p><strong>Режисер: </strong>{{ film.producer }}</p>{% endif %}
@@ -47,7 +47,7 @@
                     <div class="film poster" align="center">
                         <p class="size_name">{{film.name}}</p>
                         <a href="#"><img style="opacity:0.2;" width="150" height="230" src="{{ film.img }}"></a>
-                        <div class="descr transition">
+                        <div class="descr transition" placement="auto">
                             <p><strong>{{film.name}}</strong></p>
                             <p>Скоро будет добавлен!</p>
                             {% if film.year %}<p><strong>Год выхода в России:</strong> {{ film.published.strftime('%Y') }}</p>{% endif %}
