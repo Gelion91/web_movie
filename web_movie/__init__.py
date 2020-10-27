@@ -2,7 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from db import db
-from .user.models import User, MovieModelView
+from .user.models import User, MovieModelView, NewMovieModelView
 from .user.views import blueprint as user_blueprint
 from .video.models import Film
 from .video.views import blueprint as video_blueprint
@@ -23,7 +23,7 @@ def create_app():
     app.register_blueprint(films_blueprint)
     admin = Admin(app)
 
-    admin.add_view(MovieModelView(Film, db.session))
+    admin.add_view(NewMovieModelView(Film, db.session))
     admin.add_view(MovieModelView(User, db.session))
 
     @login_manager.user_loader
