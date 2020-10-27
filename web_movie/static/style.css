@@ -153,7 +153,7 @@ body {
     .poster:hover .descr{
         transition: .55s;
         display:block;
-        position:relative;
+        position:absolute;
         top:120px;
         z-index:9999;
         width:100%;
