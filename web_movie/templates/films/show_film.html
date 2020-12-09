@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<div class="container front">
 <div class="grid">
         {% if film.kino_id %}
-            <div>
+            {% if film.name %}<h4 align="center"><strong>Фильм: </strong>{{ film.name }}</h4>{% endif %}
+            <div style="margin-top: 1%;">
                 <div id="yohoho" data-kinopoisk='{{ film.kino_id }}' align="right"></div>
                 <p><script src="//yohoho.cc/yo.js"></script></p>
             </div>
@@ -33,5 +34,6 @@
                 {% endif %}
             {% endwith %}
         </div>
-    </div>
+</div>
+</div>
 {% endblock %}

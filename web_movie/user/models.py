@@ -31,7 +31,7 @@ class MovieModelView(ModelView):
 
 
 class NewMovieModelView(MovieModelView):
-    column_searchable_list = ('name', 'kino_id', 'year')
+    column_searchable_list = ('name', 'kino_id', 'year', 'img')
 
     def is_accessible(self):
         if not current_user.is_authenticated or not current_user.is_admin:

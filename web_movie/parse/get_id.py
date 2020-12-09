@@ -9,7 +9,7 @@ with app.app_context():
     def get_film_id():
         film_without_id = Film.query.filter(Film.kino_id.is_(None))
         for film in film_without_id:
-            if film.producer:
+            if len(film.producer) > 1:
                 print(film.year.split('.')[-1], film.name, film.producer)
                 result = get_response(film.name, producer=film.producer)
                 if result:
@@ -20,3 +20,4 @@ with app.app_context():
                             db.session.commit()
                         except:
                             print("Обнаружено совпадение " + film.name)
+

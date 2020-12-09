@@ -17,7 +17,7 @@ body {
     height: 200px;
 }
 
-#front {
+.front {
     margin-top: 100px;
     background-color: rgb(20, 21, 36);
     height: cover;

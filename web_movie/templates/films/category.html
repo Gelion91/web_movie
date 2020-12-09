@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container front">
 <div class="center">
     <div class="grid_start film pagination">
         {% if films_list.has_prev %}
@@ -90,5 +91,6 @@
             <a  href="#">Next</a>
         {% endif %}
     </div>
+</div>
 </div>
 {% endblock %}
