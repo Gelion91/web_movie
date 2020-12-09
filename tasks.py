@@ -3,7 +3,7 @@ from celery.schedules import crontab
 
 from web_movie import create_app
 from web_movie.parse.get_id import get_film_id
-from web_movie.parse.url_fasttorrent import scrap_filmlist, kino_scrap
+from web_movie.parse.url_fasttorrent import scrap_filmlist, kino_scrap, add_alt_name
 
 flask_app = create_app()
 celery_app = Celery('tasks', broker='redis://localhost:6379/0')
@@ -12,9 +12,10 @@ celery_app = Celery('tasks', broker='redis://localhost:6379/0')
 @celery_app.task
 def content():
     with flask_app.app_context():
-        for x in range(1, 10):
+        for x in range(1, 50):
             scrap_filmlist(x)
         kino_scrap()
+        add_alt_name()
         get_film_id()
 
 
