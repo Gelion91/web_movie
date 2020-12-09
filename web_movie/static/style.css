@@ -91,7 +91,7 @@ body {
 }
 .grid_start {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 0.3fr));
     grid-row-gap: 40px;
     grid-column-gap: 10px;
 }
@@ -111,7 +111,7 @@ body {
 
 .descr{
     display:none;
-    margin-left: -50%;
+    margin-left: 50%;
     padding:10px;
     margin-top:17px;
     background: rgb(34, 38, 56);
