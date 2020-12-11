@@ -82,7 +82,7 @@ def add_alt_name():
 def kino_scrap():
     """Парсинг данных со страницы фильма и сохранение в базу данных"""
     x = 0
-    film_without_content = Film.query.filter(Film.content.is_(None))
+    film_without_content = Film.query.filter(Film.actors.is_(None))
     for film in film_without_content:
         country, producer, actors, operator, music_author, content, img = '', '', '', '', '', '', ''
         html = get_html(f'http://fast-torrent.ru{film.film_page}')
@@ -103,17 +103,23 @@ def kino_scrap():
                         country.append(i.find('em', class_='cn-icon')['title'])
                 country_formated = ', '.join(country)
 
+                producer = []
                 actors = []
                 for prod in content_films('p', align='left'):
-                    if "Режиссер" or "Режиссеры" in prod.find('strong'):
+                    print(prod.find('strong'))
+                    if "Режиссер" in prod.find('strong') or "Режиссеры" in prod.find('strong'):
                         producer = prod.find('a').text
                         print('Producer: ', producer)
-                    elif "В ролях" in prod.find('strong'):
+
+                    if "В ролях" in prod.find('strong'):
                         for i in prod.find_all('a'):
                             actors.append(i.text)
-                    elif "Оператор" in prod.find('strong'):
+                        print(actors)
+
+                    if "Оператор" in prod.find('strong'):
                         operator = prod.find('a').text
-                    elif "Композитор" in prod.find('strong'):
+
+                    if "Композитор" in prod.find('strong'):
                         music_author = prod.find('a').text
                 actors_formated = ', '.join(actors)
                 try:
@@ -149,9 +155,9 @@ def save_video(img, name, category, kino_id):
 if __name__ == "__main__":
     app = create_app()
     with app.app_context():
-        for x in range(1, 10):
-            scrap_filmlist(x)
-            print(x)
+        # for x in range(1, 10):
+        #     scrap_filmlist(x)
+        #     print(x)
         kino_scrap()
         add_alt_name()
         get_film_id()
