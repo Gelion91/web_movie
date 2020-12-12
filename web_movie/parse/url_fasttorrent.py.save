@@ -32,11 +32,6 @@ def scrap_filmlist(page):
         for film in all_films:
             try:
                 name = film.find('div', class_='film-image')['alt']
-                try:
-                    alternative_name = film.find('div', class_='film-wrap').find('span', itemprop="alternativeHeadline").text
-                    print(alternative_name)
-                except:
-                    alternative_name = None
                 url = film.find('div', class_='film-image').find('a')['href']
                 year = film.find('div', class_='film-foot').find('em').text
                 year = year.split(' ')[-1]
@@ -52,7 +47,6 @@ def scrap_filmlist(page):
                 new_video = Film(
                     name=name,
                     name_lower=name.lower(),
-                    alternative_name=alternative_name,
                     category=category,
                     year=year,
                     published=datetime.strptime(year, '%d.%m.%Y'),
@@ -61,28 +55,10 @@ def scrap_filmlist(page):
                 db.session.commit()
 
 
-def add_alt_name():
-    x = 0
-    film_without_content = Film.query.filter(Film.alternative_name.is_(None))
-    for film in film_without_content:
-        html = get_html(f'http://fast-torrent.ru{film.film_page}')
-        if html:
-            x += 1
-            soup = BeautifulSoup(html, 'html.parser')
-            try:
-                alternative_name = soup.find('span', itemprop="alternativeHeadline").text
-            except:
-                alternative_name = None
-
-            film.alternative_name = alternative_name
-            print(film.alternative_name)
-            db.session.add(film)
-            db.session.commit()
-
 def kino_scrap():
     """Парсинг данных со страницы фильма и сохранение в базу данных"""
     x = 0
-    film_without_content = Film.query.filter(Film.actors.is_(None))
+    film_without_content = Film.query.filter(Film.img.is_(None))
     for film in film_without_content:
         country, producer, actors, operator, music_author, content, img = '', '', '', '', '', '', ''
         html = get_html(f'http://fast-torrent.ru{film.film_page}')
@@ -91,42 +67,25 @@ def kino_scrap():
             try:
                 soup = BeautifulSoup(html, 'html.parser')
                 content_films = soup.find('td', class_="info").find('div')
-
-                try:
-                    alternative_name = soup.find('span', itemprop="alternativeHeadline").text
-                except:
-                    alternative_name = None
-
                 country = []
                 for i in content_films('a'):
                     if i.find('em', class_='cn-icon'):
                         country.append(i.find('em', class_='cn-icon')['title'])
-                country_formated = ', '.join(country)
+                    country_formated = ', '.join(country)
 
-#                producer = []
-                actors = []
                 for prod in content_films('p', align='left'):
-                    print(prod.find('strong'))
-                    if "Режиссер" in prod.find('strong') or "Режиссеры" in prod.find('strong'):
+                    if "Режиссер" in prod.find('strong'):
                         producer = prod.find('a').text
-                        print('Producer: ', producer)
-
-                    if "В ролях" in prod.find('strong'):
+                    elif "В ролях" in prod.find('strong'):
+                        actors = []
                         for i in prod.find_all('a'):
                             actors.append(i.text)
-                        print(actors)
-
-                    if "Оператор" in prod.find('strong'):
+                        actors_formated = ', '.join(actors)
+x                    elif "Оператор" in prod.find('strong'):
                         operator = prod.find('a').text
-
-                    if "Композитор" in prod.find('strong'):
+                    elif "Композитор" in prod.find('strong'):
                         music_author = prod.find('a').text
-                actors_formated = ', '.join(actors)
-                try:
-                    content = content_films.find('p', class_='justify').text
-                except Exception as s:
-                    print("Контент: ", s)
-
+                content = content_films.find('p', class_='justify').text
                 img = soup.find('a', class_='slideshow1')['href']
                 print(x, country_formated, producer, actors_formated, operator, music_author, content, img)
                 film.country = country_formated
@@ -136,12 +95,10 @@ def kino_scrap():
                 film.music_author = music_author
                 film.content = content
                 film.img = img
-                film.alternative_name = alternative_name
-                print("add producer:", film.producer)
                 db.session.add(film)
                 db.session.commit()
-            except Exception as s:
-                print('Ошибка: ', s)
+            except:
+                print('Ошибка')
 
 
 def save_video(img, name, category, kino_id):
@@ -155,10 +112,8 @@ def save_video(img, name, category, kino_id):
 if __name__ == "__main__":
     app = create_app()
     with app.app_context():
-        # for x in range(1, 10):
-        #     scrap_filmlist(x)
-        #     print(x)
+        for x in range(1, 10):
+            scrap_filmlist(x)
         kino_scrap()
-        add_alt_name()
         get_film_id()
 
