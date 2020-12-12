@@ -5,7 +5,7 @@ from datetime import datetime
 
 from web_movie import db, create_app
 from web_movie.parse.get_id import get_film_id
-from web_movie.video.models import Film
+from web_movie.video.models import Film, Serial
 from fake_useragent import UserAgent
 
 
@@ -79,6 +79,7 @@ def add_alt_name():
             db.session.add(film)
             db.session.commit()
 
+
 def kino_scrap():
     """Парсинг данных со страницы фильма и сохранение в базу данных"""
     x = 0
@@ -144,21 +145,116 @@ def kino_scrap():
                 print('Ошибка: ', s)
 
 
-def save_video(img, name, category, kino_id):
-    new_video = Film.query.filter(Film.img == img).count()
-    if not new_video:
-        new_video = Film(img=img, name=name, category=category, kino_id=kino_id, content='', film_page='', year='')
-        db.session.add(new_video)
-        db.session.commit()
+def scrap_seriallist(page):
+    """Парсинг ссылок на страницы с сериалами"""
+    html = get_html(f'http://fast-torrent.ru/last-tv-torrent/{page}.html')
+    if html:
+        soup = BeautifulSoup(html, 'html.parser')
+        all_films = soup.find('div', class_="film-list").findAll('div', itemtype='https://schema.org/Movie')
+
+        for film in all_films:
+            try:
+                name = film.find('div', class_='film-image')['alt']
+                try:
+                    alternative_name = film.find('div', class_='film-wrap').find('span', itemprop="alternativeHeadline").text
+                    print(alternative_name)
+                except:
+                    alternative_name = None
+                url = film.find('div', class_='film-image').find('a')['href']
+                year = film.find('div', class_='film-foot').find('em').text
+                year = year.split(' ')[-1]
+            except AttributeError:
+                print("C этим сериалом проблема!", name)
+
+            genre = []
+            for cat in film.find('div', class_='film-genre').find_all('a', itemprop='genre'):
+                genre.append(cat.text)
+            category = ', '.join(genre)
+
+            new_video = Serial.query.filter(Serial.film_page == url).count()
+            if not new_video:
+                print(name, url)
+                new_video = Serial(
+                    name=name,
+                    name_lower=name.lower(),
+                    alternative_name=alternative_name,
+                    category=category,
+                    year=year,
+                    published=datetime.strptime(year, '%d.%m.%Y'),
+                    film_page=url)
+                db.session.add(new_video)
+                db.session.commit()
+
+
+def serial_scrap():
+    """Парсинг данных со страницы фильма и сохранение в базу данных"""
+    x = 0
+    serial_without_content = Serial.query.filter(Serial.actors.is_(None))
+    for film in serial_without_content:
+        country, producer, actors, operator, music_author, content, img = '', '', '', '', '', '', ''
+        html = get_html(f'http://fast-torrent.ru{film.film_page}')
+        if html:
+            x += 1
+            try:
+                soup = BeautifulSoup(html, 'html.parser')
+                content_films = soup.find('td', class_="info").find_all('div')
+
+                actors = []
+                country = []
+                for serial in content_films:
+                    for i in serial('a'):
+                        if i.find('em', class_='cn-icon'):
+                            country.append(i.find('em', class_='cn-icon')['title'])
+                    country_formated = ', '.join(country)
+
+                    for prod in serial('p', align='left'):
+                        if "Режиссер" in prod.find('strong') or "Режиссеры" in prod.find('strong'):
+                            producer = prod.find('a').text
+                            print('Producer: ', producer)
+
+                        if "В ролях" in prod.find('strong'):
+                            for i in prod.find_all('a'):
+                                print(i)
+                                actors.append(i.text)
+                        elif "Оператор" in prod.find('strong'):
+                            operator = prod.find('a').text
+                        elif "Композитор" in prod.find('strong'):
+                            music_author = prod.find('a').text
+
+                    try:
+                        content = serial.find('p', class_='justify').text
+                        print('отработал try')
+                    except Exception:
+                        pass
+
+                actors_formated = ', '.join(actors)
+                img = soup.find('a', class_='slideshow1')['href']
+                print(x, country_formated, producer, actors_formated, operator, music_author, content, img)
+                film.country = country_formated
+                film.producer = producer
+                film.actors = actors_formated
+                film.operator = operator
+                film.music_author = music_author
+                film.content = content
+                film.img = img
+                print("add producer:", film.producer)
+                db.session.add(film)
+                db.session.commit()
+            except Exception as s:
+                print('Ошибка: ', s)
 
 
 if __name__ == "__main__":
     app = create_app()
     with app.app_context():
-        # for x in range(1, 10):
-        #     scrap_filmlist(x)
-        #     print(x)
+        for x in range(1, 10):
+            scrap_filmlist(x)
+            print(x)
         kino_scrap()
-        add_alt_name()
         get_film_id()
+
+        for x in range(1, 318):
+            scrap_seriallist(x)
+            print(x)
+        serial_scrap()
 

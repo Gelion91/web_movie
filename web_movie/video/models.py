@@ -26,13 +26,14 @@ class Film(db.Model):
         return f'фильм {"name"}, id: {"id"}'
 
 
-class Serials(db.Model):
+class Serial(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     published = db.Column(db.DateTime)
     year = db.Column(db.String(), index=True)
     img = db.Column(db.String(), index=True)
     name = db.Column(db.String(), index=True)
     name_lower = db.Column(db.String(), index=True)
+    alternative_name = db.Column(db.String(), index=True)
     category = db.Column(db.String(), index=True)
     tags = db.Column(db.String(), index=True)
     kino_id = db.Column(db.String(), index=True, unique=True)
