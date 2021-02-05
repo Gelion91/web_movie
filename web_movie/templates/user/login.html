@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-        <div class="row allpadding">
-            <div class="col-4">
+    <div class="container front">
+        <div class="row allpadding log">
+            <div class="col">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                     <h4>{{page_title}}</h4>
                     <div class="alert alert-warning" role="alert">
                         {% for message in messages %}
-                            {{ message }}<br>
+                        {{ message }}<br>
                         {% endfor %}
                     </div>
                     {% endif %}
@@ -15,19 +16,20 @@
                 <form action="{{ url_for('users.process_login') }}" method="POST">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
-                        {{ form.username.label }}
+                        <p>{{ form.username.label }}</p>
                         {{ form.username() }}
                     </div>
                     <div class="form-group">
-                        {{ form.password.label }}
+                        <p>{{ form.password.label }}</p>
                         {{ form.password() }}
                     </div>
                     <div class="form-group form-check">
                         {{ form.remember_me() }}
-                        {{ form.remember_me.label(class_='form-check-label') }}
+                        <p>{{ form.remember_me.label(class_='form-check-label') }}</p>
                     </div>
                         {{ form.submit }}
                 </form>
             </div>
         </div>
+    </div>
 {% endblock %}

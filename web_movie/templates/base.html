@@ -4,22 +4,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="yandex-verification" content="03acaae4942ee57d" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
-<script type="text/javascript">
-$(function() {
-$(window).scroll(function() {
-if($(this).scrollTop() != 0) {
-$('#toTop').fadeIn();
-} else {
-$('#toTop').fadeOut();
-}
-});
-$('#toTop').click(function() {
-$('body,html').animate({scrollTop:0},800);
-});
-});
-</script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/style.css">
@@ -43,7 +30,16 @@ $('body,html').animate({scrollTop:0},800);
   </head>
   <body>
     {% include 'menu.html' %}
-    <div id="toTop"> ^ Наверх</div>
+    <div class="container">
+      <form class="form-row" align="center" action="/search" method="POST">
+        <div class="col-10">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+        </div>
+        <div class="col-2">
+          <button class="btn btnm" type="submit">Поиск</button>
+        </div>
+      </form>
+    </div>
     <div class="container-fluid" id="back">
       <div align="center"><img id="hat" src="/static/image/logo-1-1.png"></div>
       {% block content %}

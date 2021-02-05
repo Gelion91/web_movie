@@ -1,33 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <div class="alert alert-danger" role="alert">
-        {% for message in messages %}
-            {{ message }}<br>
-        </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-        <div class="row allpadding">
-            <div class="col-4">
+    <div class="container front">
+        <div class="row allpadding log">
+            <div class="col">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                        {% for message in messages %}
+                            {{ message }}<br>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
                 <form action="{{ url_for('users.process_registration') }}" method="POST">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
-                        {{ form.username.label }}
+                        <p>{{ form.username.label }}</p>
                         {{ form.username() }}
                     </div>
                     <div class="form-group">
-                        {{ form.email.label }}
+                        <p>{{ form.email.label }}</p>
                         {{ form.email() }}
                     </div>
                     <div class="form-group">
-                        {{ form.password.label }}
+                        <p>{{ form.password.label }}</p>
                         {{ form.password() }}
                     </div>
                     <div class="form-group">
-                        {{ form.password_reply.label }}
+                        <p>{{ form.password_reply.label }}</p>
                         {{ form.password_reply() }}
                     </div>
                         {{ form.submit }}
@@ -35,4 +36,5 @@
                 </form>
             </div>
         </div>
+    </div>
 {% endblock %}
